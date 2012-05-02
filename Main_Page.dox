@@ -1,0 +1,93 @@
+/**
+\mainpage Introduction
+\brief Petrinet Toolbox: A general Petri-Net implementation in Matlab
+\author Erik Zandvliet
+\version 1.0
+
+\section Introduction Introduction
+
+\section ProducerConsumer The Producer/Consumer Model
+\subsection PTNet P/T Net
+\subsubsection PTPlaces Places
+\f[
+  \bordermatrix{ & PlaceID \cr & Producer\_ReadyToProduce \cr & Producer\_NonIdle \cr & Consumer\_ReadyToConsume \cr & Consumer\_NonIdle \cr & Buffer \cr }
+\f]
+\code
+%Add places
+  %Without inital markings
+    PN.Add( 'Place', 'Producer_NonIdle' );
+    PN.Add( 'Place', 'Consumer_NonIdle' );
+    PN.Add( 'Place', 'Buffer' );
+  %With initial markings
+    PN.Add( 'Place', 'Producer_ReadyToProduce', 'Dot', '1.');
+    PN.Add( 'Place', 'Consumer_ReadyToConsume', 'Dot', '1.' );
+\endcode
+
+\subsubsection PTTransitions Transitions
+\f[
+  \bordermatrix{ & TransitionID \cr & Produce \cr & Producer\_ToIdle \cr & Consume \cr & Consumer\_ToIdle \cr }
+\f]
+\code
+%Add transitions
+    PN.Add( 'Transition', 'Produce' );
+    PN.Add( 'Transition', 'Producer_ToIdle' );
+    PN.Add( 'Transition', 'Consume' );
+    PN.Add( 'Transition', 'Consumer_ToIdle' );
+\endcode
+
+\subsubsection PTTransitions Transitions
+\f[
+  \bordermatrix{
+                           & Produce & Producer\_ToIdle & Consume & Consumer\_ToIdle \cr
+  Producer\_ReadyToProduce & -1 & 1  & 0  & 0 \cr
+  Producer\_NonIdle        & 1  & -1 & 0  & 0 \cr
+  Consumer\_ReadyToConsume & 0  & 0  & -1 & 1 \cr
+  Consumer\_NonIdle        & 0  & 0  & -1 & 1 \cr
+  }
+\f]
+
+\code
+%Add arcs
+  %Produce
+    PN.Add( 'Arc', 'Producer_ReadyToProduce->Produce', '1.' );
+    PN.Add( 'Arc', 'Produce->Producer_NonIdle', '1.' );
+    PN.Add( 'Arc', 'Produce->Buffer', '1.' );
+  %Producer_ToIdle
+    PN.Add( 'Arc', 'Producer_ToIdle->Producer_ReadyToProduce', '1.' );
+    PN.Add( 'Arc', 'Producer_NonIdle->Producer_ToIdle', '1.' );
+  %Consume
+    PN.Add( 'Arc', 'Buffer->Consume', '1.' );
+    PN.Add( 'Arc', 'Consume->Consumer_ReadyToConsume', '1.' );
+    PN.Add( 'Arc', 'Consumer_NonIdle->Consume', '1.' );
+  %Consumer_ToIdle
+    PN.Add( 'Arc', 'Consumer_ReadyToConsume->Consumer_ToIdle', '1.' );
+    PN.Add( 'Arc', 'Consumer_ToIdle->Consumer_NonIdle', '1.' );
+\endcode
+
+\subsubsection PTExec Execution of the Model
+\f[
+  M_0 ~~ = ~~ \bordermatrix{
+    & Producer\_ReadyToProduce & Producer\_NonIdle & Consumer\_ReadyToConsume & Consumer\_NonIdle & Buffer \cr
+    \cdot & 1 & 0 & 1 & 0 & 0 \cr
+  }
+\f]
+
+Calculating concession for each transition:
+
+\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
+   \bordermatrix{& Produce \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr} = 
+   \bordermatrix{& \cr & 0 \cr & 1 \cr & 1 \cr & 0 \cr & 1 \cr} \ge 0
+\f]
+\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
+   \bordermatrix{& Producer\_ToIdle \cr & 1 \cr & -1 \cr & 0 \cr & 0 \cr & 0 \cr} = 
+   \bordermatrix{& \cr & 2 \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr} < 0
+\f]
+\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
+   \bordermatrix{& Consume \cr & 0 \cr & 0 \cr & -1 \cr & 1 \cr & -1 \cr} = 
+   \bordermatrix{& \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr} < 0
+\f]
+\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
+   \bordermatrix{& Consumer\_ToIdle \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr & 0 \cr} = 
+   \bordermatrix{& \cr & 1 \cr & 0 \cr & 2 \cr & -1 \cr & 0 \cr} < 0
+\f]
+**/

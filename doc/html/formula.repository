@@ -1,0 +1,27 @@
+\form#0:\[ \bordermatrix{ & PlaceID \cr & Producer\_ReadyToProduce \cr & Producer\_NonIdle \cr & Consumer\_ReadyToConsume \cr & Consumer\_NonIdle \cr & Buffer \cr } \]
+\form#1:\[ \bordermatrix{ & TransitionID \cr & Produce \cr & Producer\_ToIdle \cr & Consume \cr & Consumer\_ToIdle \cr } \]
+\form#2:\[ \bordermatrix{ & Produce & Producer\_ToIdle & Consume & Consumer\_ToIdle \cr Producer\_ReadyToProduce & -1 & 1 & 0 & 0 \cr Producer\_NonIdle & 1 & -1 & 0 & 0 \cr Consumer\_ReadyToConsume & 0 & 0 & -1 & 1 \cr Consumer\_NonIdle & 0 & 0 & -1 & 1 \cr } \]
+\form#3:\[ M_0 ~~ = ~~ \bordermatrix{ & Producer\_ReadyToProduce & Producer\_NonIdle & Consumer\_ReadyToConsume & Consumer\_NonIdle & Buffer \cr \cdot & 1 & 0 & 1 & 0 & 0 \cr } \]
+\form#4:\[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} + \bordermatrix{& Produce \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr} = \bordermatrix{& \cr & 0 \cr & 1 \cr & 1 \cr & 0 \cr & 1 \cr} \ge 0 \]
+\form#5:\[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} + \bordermatrix{& Producer\_ToIdle \cr & 1 \cr & -1 \cr & 0 \cr & 0 \cr & 0 \cr} = \bordermatrix{& \cr & 2 \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr} < 0 \]
+\form#6:\[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} + \bordermatrix{& Consume \cr & 0 \cr & 0 \cr & -1 \cr & 1 \cr & -1 \cr} = \bordermatrix{& \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr} < 0 \]
+\form#7:\[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} + \bordermatrix{& Consumer\_ToIdle \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr & 0 \cr} = \bordermatrix{& \cr & 1 \cr & 0 \cr & 2 \cr & -1 \cr & 0 \cr} < 0 \]
+\form#8:\[\bordermatrix{ & p_1 & p_2 & \dots & p_n \cr c_1 & [~~] & [~~] & & [~~] \cr c_2 & [~~] & [~~] & & [~~] \cr \vdots & & & & \cr c_m & [~~] & [~~] & & [~~] \cr }\]
+\form#9:$ p \in P $
+\form#10:\[\bordermatrix{ & \cr & p_1 \cr & p_2 \cr & \vdots \cr & p_n }\]
+\form#11:$ t \in T $
+\form#12:\[\bordermatrix{ & \cr & t_1 \cr & t_2 \cr & \vdots \cr & t_n }\]
+\form#13:$ c \in C_n $
+\form#14:$ C_n $
+\form#15:\[\bordermatrix{ & \mathrm{Color} & \mathrm{ColorSet} \cr & c_1 & C_1 \cr & c_2 & C_1 \cr & \vdots & \vdots \cr & c_m & C_n }\]
+\form#16:$ C_n \in C$
+\form#17:\[\bordermatrix{ & \cr & C_1 \cr & C_2 \cr & \vdots \cr & C_n }\]
+\form#18:$ v \in V $
+\form#19:\[\bordermatrix{ & \mathrm{Variable} & \mathrm{ColorSet} \cr & v_1 & C_2 \cr & v_2 & C_1 \cr & \vdots & \vdots \cr & v_m & C_n }\]
+\form#20:\[\bordermatrix{ & \mathrm{Effect} \cr c_1 & [~~] \cr c_2 & [~~] \cr \vdots & \cr c_n & [~~] }\]
+\form#21:\[\bordermatrix{ & \mathrm{Effect} \cr v_1 & [~~] \cr v_2 & [~~] \cr \vdots & \cr v_n & [~~] }\]
+\form#22:$\mathcal{R}$
+\form#23:$(x \in $
+\form#24:$,y \in $
+\form#25:$)$
+\form#26:$x \in$
