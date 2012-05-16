@@ -1,10 +1,18 @@
 /**
 \mainpage Introduction
-\brief Petrinet Toolbox: A general Petri-Net implementation in Matlab
-\author Erik Zandvliet
+\brief A generic Petri-Net implementation in Matlab
+\author Erik Zandvliet<br>
+University of Leiden<br>
+ezandvli@liacs.nl
 \version 1.0
 
 \section Introduction Introduction
+
+Petri Nets are models -- with well-known algorithms for proving or disproving statements about these models -- that can be used for the modeling of systems, but there is not one tool that can be used for all the different types of nets that have been developed over the last couple of years. To still be able to do research on these nets, most research groups write their own simple tools, which are useless once the researcher leaves the group. There are some more extended packages available as well, for example Snoopy and CPN-Tools, but these have closed sources, and don't necessarily have all the features a researcher would like to have control over while creating these nets.
+      
+Therefore, our intent is to create an open-source software package that is able to implement several types of petri-nets, and in which the user has full control over all functionality. 
+
+One of the key features of the software package, is this documentation. It is an essential feature in maintaining the package, and in giving everybody an as large as possible freedom to extend/use the package.
 
 \section ProducerConsumer The Producer/Consumer Model
 \subsection PTNet P/T Net
@@ -63,31 +71,4 @@
     PN.Add( 'Arc', 'Consumer_ReadyToConsume->Consumer_ToIdle', '1.' );
     PN.Add( 'Arc', 'Consumer_ToIdle->Consumer_NonIdle', '1.' );
 \endcode
-
-\subsubsection PTExec Execution of the Model
-\f[
-  M_0 ~~ = ~~ \bordermatrix{
-    & Producer\_ReadyToProduce & Producer\_NonIdle & Consumer\_ReadyToConsume & Consumer\_NonIdle & Buffer \cr
-    \cdot & 1 & 0 & 1 & 0 & 0 \cr
-  }
-\f]
-
-Calculating concession for each transition:
-
-\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
-   \bordermatrix{& Produce \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr} = 
-   \bordermatrix{& \cr & 0 \cr & 1 \cr & 1 \cr & 0 \cr & 1 \cr} \ge 0
-\f]
-\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
-   \bordermatrix{& Producer\_ToIdle \cr & 1 \cr & -1 \cr & 0 \cr & 0 \cr & 0 \cr} = 
-   \bordermatrix{& \cr & 2 \cr & -1 \cr & 1 \cr & 0 \cr & 0 \cr} < 0
-\f]
-\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
-   \bordermatrix{& Consume \cr & 0 \cr & 0 \cr & -1 \cr & 1 \cr & -1 \cr} = 
-   \bordermatrix{& \cr & 1 \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr} < 0
-\f]
-\f[\bordermatrix{& \cr Producer\_ReadyToProduce & 1 \cr Producer\_NonIdle & 0 \cr Consumer\_ReadyToConsume & 1 \cr Consumer\_NonIdle & 0 \cr Buffer & 0 \cr} +
-   \bordermatrix{& Consumer\_ToIdle \cr & 0 \cr & 0 \cr & 1 \cr & -1 \cr & 0 \cr} = 
-   \bordermatrix{& \cr & 1 \cr & 0 \cr & 2 \cr & -1 \cr & 0 \cr} < 0
-\f]
 **/

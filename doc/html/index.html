@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>PetriNet Toolbox: Introduction</title>
+<title>PetriLab: Introduction</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
   
   
   <td style="padding-left: 0.5em;">
-   <div id="projectname">PetriNet Toolbox
+   <div id="projectname">PetriLab
    
    </div>
    
@@ -49,11 +49,16 @@
 <div class="title">Introduction </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Petrinet Toolbox: A general Petri-Net implementation in Matlab </p>
-<dl class="section author"><dt>Author:</dt><dd>Erik Zandvliet </dd></dl>
+<div class="textblock"><p>A generic Petri-Net implementation in Matlab </p>
+<dl class="section author"><dt>Author:</dt><dd>Erik Zandvliet<br/>
+ University of Leiden<br/>
+ <a href="#" onclick="location.href='mai'+'lto:'+'eza'+'nd'+'vli'+'@l'+'iac'+'s.'+'nl'; return false;">ezand<span style="display: none;">.nosp@m.</span>vli@<span style="display: none;">.nosp@m.</span>liacs<span style="display: none;">.nosp@m.</span>.nl</a> </dd></dl>
 <dl class="section version"><dt>Version:</dt><dd>1.0</dd></dl>
 <h2><a class="anchor" id="Introduction"></a>
 Introduction</h2>
+<p>Petri Nets are models -- with well-known algorithms for proving or disproving statements about these models -- that can be used for the modeling of systems, but there is not one tool that can be used for all the different types of nets that have been developed over the last couple of years. To still be able to do research on these nets, most research groups write their own simple tools, which are useless once the researcher leaves the group. There are some more extended packages available as well, for example Snoopy and CPN-Tools, but these have closed sources, and don't necessarily have all the features a researcher would like to have control over while creating these nets.</p>
+<p>Therefore, our intent is to create an open-source software package that is able to implement several types of petri-nets, and in which the user has full control over all functionality.</p>
+<p>One of the key features of the software package, is this documentation. It is an essential feature in maintaining the package, and in giving everybody an as large as possible freedom to extend/use the package.</p>
 <h2><a class="anchor" id="ProducerConsumer"></a>
 The Producer/Consumer Model</h2>
 <h3><a class="anchor" id="PTNet"></a>
@@ -101,29 +106,11 @@ Transitions</h4>
   %Consumer_ToIdle
     <a class="code" href="class_p_n.html">PN</a>.<a class="code" href="class_p_n.html#a687c277838fa824d56c9f5640eeb4509" title="Add an entry to the net.">Add</a>( <span class="stringliteral">&#39;Arc&#39;</span>, <span class="stringliteral">&#39;Consumer_ReadyToConsume-&gt;Consumer_ToIdle&#39;</span>, <span class="stringliteral">&#39;1.&#39;</span> );
     <a class="code" href="class_p_n.html">PN</a>.<a class="code" href="class_p_n.html#a687c277838fa824d56c9f5640eeb4509" title="Add an entry to the net.">Add</a>( <span class="stringliteral">&#39;Arc&#39;</span>, <span class="stringliteral">&#39;Consumer_ToIdle-&gt;Consumer_NonIdle&#39;</span>, <span class="stringliteral">&#39;1.&#39;</span> );
-</pre></div><h4><a class="anchor" id="PTExec"></a>
-Execution of the Model</h4>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\[ M_0 ~~ = ~~ \bordermatrix{ &amp; Producer\_ReadyToProduce &amp; Producer\_NonIdle &amp; Consumer\_ReadyToConsume &amp; Consumer\_NonIdle &amp; Buffer \cr \cdot &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \cr } \]" src="form_3.png"/>
-</p>
-<p>Calculating concession for each transition:</p>
-<p class="formulaDsp">
-<img class="formulaDsp" alt="\[\bordermatrix{&amp; \cr Producer\_ReadyToProduce &amp; 1 \cr Producer\_NonIdle &amp; 0 \cr Consumer\_ReadyToConsume &amp; 1 \cr Consumer\_NonIdle &amp; 0 \cr Buffer &amp; 0 \cr} + \bordermatrix{&amp; Produce \cr &amp; -1 \cr &amp; 1 \cr &amp; 0 \cr &amp; 0 \cr &amp; 1 \cr} = \bordermatrix{&amp; \cr &amp; 0 \cr &amp; 1 \cr &amp; 1 \cr &amp; 0 \cr &amp; 1 \cr} \ge 0 \]" src="form_4.png"/>
-</p>
- <p class="formulaDsp">
-<img class="formulaDsp" alt="\[\bordermatrix{&amp; \cr Producer\_ReadyToProduce &amp; 1 \cr Producer\_NonIdle &amp; 0 \cr Consumer\_ReadyToConsume &amp; 1 \cr Consumer\_NonIdle &amp; 0 \cr Buffer &amp; 0 \cr} + \bordermatrix{&amp; Producer\_ToIdle \cr &amp; 1 \cr &amp; -1 \cr &amp; 0 \cr &amp; 0 \cr &amp; 0 \cr} = \bordermatrix{&amp; \cr &amp; 2 \cr &amp; -1 \cr &amp; 1 \cr &amp; 0 \cr &amp; 0 \cr} < 0 \]" src="form_5.png"/>
-</p>
- <p class="formulaDsp">
-<img class="formulaDsp" alt="\[\bordermatrix{&amp; \cr Producer\_ReadyToProduce &amp; 1 \cr Producer\_NonIdle &amp; 0 \cr Consumer\_ReadyToConsume &amp; 1 \cr Consumer\_NonIdle &amp; 0 \cr Buffer &amp; 0 \cr} + \bordermatrix{&amp; Consume \cr &amp; 0 \cr &amp; 0 \cr &amp; -1 \cr &amp; 1 \cr &amp; -1 \cr} = \bordermatrix{&amp; \cr &amp; 1 \cr &amp; 0 \cr &amp; 0 \cr &amp; 1 \cr &amp; -1 \cr} < 0 \]" src="form_6.png"/>
-</p>
- <p class="formulaDsp">
-<img class="formulaDsp" alt="\[\bordermatrix{&amp; \cr Producer\_ReadyToProduce &amp; 1 \cr Producer\_NonIdle &amp; 0 \cr Consumer\_ReadyToConsume &amp; 1 \cr Consumer\_NonIdle &amp; 0 \cr Buffer &amp; 0 \cr} + \bordermatrix{&amp; Consumer\_ToIdle \cr &amp; 0 \cr &amp; 0 \cr &amp; 1 \cr &amp; -1 \cr &amp; 0 \cr} = \bordermatrix{&amp; \cr &amp; 1 \cr &amp; 0 \cr &amp; 2 \cr &amp; -1 \cr &amp; 0 \cr} < 0 \]" src="form_7.png"/>
-</p>
- </div></div><!-- contents -->
+</pre></div> </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 2 2012 20:15:34 for PetriNet Toolbox by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed May 16 2012 11:55:09 for PetriLab by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.0
 </small></address>

@@ -1515,8 +1515,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.HasConcession()
     %> - Stores the value 1 in the variable 'Boolean' if the transition has concession, and 0 if it does not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = HasConcession( Object, Input )
       if iscell( Input )
         Name = Input{1};
@@ -1590,8 +1588,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.Fire()
     %> - Stores the value 1 in the variable 'Boolean' if firing the transition succeeded, and 0 if it did not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = Fire( Object, Input )
       Exception = 'E_NONE';
       if iscell( Input )
@@ -1636,8 +1632,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.SetInitial()
     %> - Stores the value 1 in the variable 'Boolean' if the initial marking is succesfully altered, and 0 if it is not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = SetInitial( Object, Place, NewInitials )
       Boolean = 1;
       Exception = 'E_NONE';
@@ -1700,8 +1694,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.SetInscription()
     %> - Stores the value 1 in the variable 'Boolean' if the inscription is succesfully altered, and 0 if it is not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] =  SetInscription( Object, Arc, Inscription )
       Boolean = 1;
       [Type,Src,Dst] = Object.ParseArc( Arc );
@@ -1824,8 +1816,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.SetEffect()
     %> - Stores the value 1 in the variable 'Boolean' if the effect is succesfully altered, and 0 if it is not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = SetEffect( Object, Arc, Effect, VarEffect )
       Exception = 'E_NONE';
       Boolean = 1;
@@ -1861,8 +1851,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.SetLower()
     %> - Stores the value 1 in the variable 'Boolean' if the Lower Bound is succesfully altered, and 0 if it is not.
     %> - Stores the last active exception in the variable 'Exception'.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = SetLower( Object, Arc, Lower, VarLower )
       Exception = 'E_NONE';
       Boolean = 1;
@@ -1897,8 +1885,6 @@ classdef PN < handle
     %>> [Boolean,Exception] = PN.SetUpper()
     %> - Boolean stores the value 1 if the Upper Bound is succesfully altered, and 0 if it is not.
     %> - Exception stores the last active exception.
-    %>
-    %>\todo Exception Handling documenten
     function [Boolean,Exception] = SetUpper( Object, Arc, Upper, VarUpper )
       Exception = 'E_NONE';
       Boolean = 1;

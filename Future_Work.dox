@@ -1,0 +1,7 @@
+/**
+\page FutureOptions Future Options
+
+\todo Implement a GUI for designing and running nets.
+
+\todo Implement concurrent firing rules.
+**/
